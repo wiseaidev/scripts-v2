@@ -6,6 +6,7 @@ import {
   OpenBookV2Client,
   PlaceOrderArgs,
   Side,
+  Market,
 } from "@openbook-dex/openbook-v2";
 import { MintUtils } from "./mint_utils";
 
@@ -19,25 +20,27 @@ async function main() {
   const marketPublicKey = new PublicKey(
     "BLr5UmvkfoVC4yth5CX2jBT5X75Z61gkLPMbJRNxiRqa"
   );
-  const market = await client.deserializeMarketAccount(marketPublicKey);
+  const market = await Market.load(client, marketPublicKey);
   if (!market) {
     throw "No market";
   }
 
-  const eventHeap = await client.deserializeEventHeapAccount(market.eventHeap);
+  const eventHeap = await client.deserializeEventHeapAccount(
+    market.account.eventHeap
+  );
   if (!eventHeap) {
     throw "No event heap";
   }
   console.log("event heap length", eventHeap.header.count);
 
   if (eventHeap.header.count > 0) {
-    const accounts = await client.getAccountsToConsume(market);
+    const accounts = await client.getAccountsToConsume(market.account);
     if (accounts) {
       console.log("accounts lenght", accounts.length);
 
       const ix = await client.consumeEventsIx(
         marketPublicKey,
-        market,
+        market.account,
         new BN(8),
         accounts
       );
@@ -52,7 +55,7 @@ async function main() {
 
   const [ix, signers] = await client.closeMarketIx(
     marketPublicKey,
-    market,
+    market.account,
     wallet.publicKey,
     wallet.payer
   );
@@ -62,4 +65,4 @@ async function main() {
   console.log("Closed market ", tx);
 }
 
-main();
+main().catch((err) => console.error(err));

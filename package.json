@@ -1,5 +1,5 @@
 {
-  "name": "yolodolo",
+  "name": "the-holy-book-services",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,10 +10,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@coral-xyz/anchor": "^0.28.1-beta.1",
-    "@openbook-dex/openbook-v2": "^0.1.5",
-    "@solana/spl-token": "^0.3.8",
-    "@solana/web3.js": "^1.78.3"
+    "@coral-xyz/anchor": "^0.29.0",
+    "@openbook-dex/openbook-v2": "^0.2.10",
+    "@solana/spl-token": "^0.4.6",
+    "@solana/web3.js": "^1.93.1"
   },
   "devDependencies": {
     "@types/node": "^20.5.0",

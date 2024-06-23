@@ -10,7 +10,9 @@ import { authority } from "./utils";
 import { RPC } from "./utils";
 import { OpenBookV2Client } from "@openbook-dex/openbook-v2";
 
-const LOOKUP_TABLE_ADDRESS = new PublicKey("89PiVrPT2LRdQncErZxPSAKfB6WXqZdX9Hx8UBTzbfN8");
+const LOOKUP_TABLE_ADDRESS = new PublicKey(
+  "89PiVrPT2LRdQncErZxPSAKfB6WXqZdX9Hx8UBTzbfN8"
+);
 
 const addressesToAdd = [new PublicKey("")];
 
